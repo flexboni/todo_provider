@@ -2,13 +2,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_provider/provider/todo_list.dart';
 
-class ActiveTodoCounterState extends Equatable {
+class ActiveTodoCountState extends Equatable {
   final int activeTodoCount;
 
-  const ActiveTodoCounterState({required this.activeTodoCount});
+  const ActiveTodoCountState({required this.activeTodoCount});
 
-  factory ActiveTodoCounterState.initial() =>
-      const ActiveTodoCounterState(activeTodoCount: 0);
+  factory ActiveTodoCountState.initial() =>
+      const ActiveTodoCountState(activeTodoCount: 0);
 
   @override
   List<Object> get props => [activeTodoCount];
@@ -16,19 +16,19 @@ class ActiveTodoCounterState extends Equatable {
   @override
   bool get stringify => true;
 
-  ActiveTodoCounterState copyWith({
+  ActiveTodoCountState copyWith({
     int? activeTodoCount,
   }) {
-    return ActiveTodoCounterState(
+    return ActiveTodoCountState(
       activeTodoCount: activeTodoCount ?? this.activeTodoCount,
     );
   }
 }
 
-class TodoSearch with ChangeNotifier {
-  ActiveTodoCounterState _state = ActiveTodoCounterState.initial();
+class ActiveTodoCount with ChangeNotifier {
+  ActiveTodoCountState _state = ActiveTodoCountState.initial();
 
-  ActiveTodoCounterState get state => _state;
+  ActiveTodoCountState get state => _state;
 
   void update(TodoList todoList) {
     final int newActiveTodoCount =
