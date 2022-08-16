@@ -29,7 +29,14 @@ class FilteredTodosState extends Equatable {
 }
 
 class FilteredTodos with ChangeNotifier {
-  FilteredTodosState _state = FilteredTodosState.initial();
+  FilteredTodos({required this.initialFilteredTodos}) {
+    print('initialFilteredTodos: $initialFilteredTodos');
+    _state = FilteredTodosState(filteredTodos: initialFilteredTodos);
+  }
+
+  final List<Todo> initialFilteredTodos;
+
+  late FilteredTodosState _state;
 
   FilteredTodosState get state => _state;
 
@@ -57,8 +64,9 @@ class FilteredTodos with ChangeNotifier {
 
     if (todoSearch.state.searchTerm.isNotEmpty) {
       newFilteredTodos = newFilteredTodos
-          .where((todo) =>
-              todo.desc.toUpperCase().contains(todoSearch.state.searchTerm))
+          .where((todo) => todo.desc
+              .toUpperCase()
+              .contains(todoSearch.state.searchTerm.toUpperCase()))
           .toList();
     }
 

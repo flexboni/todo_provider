@@ -26,7 +26,16 @@ class ActiveTodoCountState extends Equatable {
 }
 
 class ActiveTodoCount with ChangeNotifier {
-  ActiveTodoCountState _state = ActiveTodoCountState.initial();
+  ActiveTodoCount({
+    required this.initialActiveTodoCount,
+  }) {
+    print('initialActiveTodoCount: $initialActiveTodoCount');
+    _state = ActiveTodoCountState(activeTodoCount: initialActiveTodoCount);
+  }
+
+  final int initialActiveTodoCount;
+
+  late ActiveTodoCountState _state;
 
   ActiveTodoCountState get state => _state;
 

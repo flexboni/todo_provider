@@ -21,13 +21,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<TodoSearch>(create: (context) => TodoSearch()),
         ChangeNotifierProvider<TodoList>(create: (context) => TodoList()),
         ChangeNotifierProxyProvider<TodoList, ActiveTodoCount>(
-          create: (context) => ActiveTodoCount(),
+          create: (context) => ActiveTodoCount(
+            initialActiveTodoCount: context.read<TodoList>().state.todos.length,
+          ),
           update: (_, todoList, activeTodoCount) =>
               activeTodoCount!..update(todoList),
         ),
         ChangeNotifierProxyProvider3<TodoFilter, TodoSearch, TodoList,
             FilteredTodos>(
-          create: (context) => FilteredTodos(),
+          create: (context) => FilteredTodos(
+            initialFilteredTodos: context.read<TodoList>().state.todos,
+          ),
           update: (_, todoFilter, todoSearch, todoList, filteredTodos) =>
               filteredTodos!..update(todoFilter, todoSearch, todoList),
         )
